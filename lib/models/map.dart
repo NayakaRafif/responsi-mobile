@@ -1,51 +1,22 @@
-class GameMap {
-  final String uuid;
+class ValorantMap {
   final String displayName;
-  final String coordinates;
-  final String displayIcon;
   final String splash;
-  final String thumbnail;
+  final String? coordinates; // Ubah menjadi nullable
+  final String displayIcon; // Tambahkan atribut displayIcon
 
-  GameMap({
-    required this.uuid,
+  ValorantMap({
     required this.displayName,
-    required this.coordinates,
-    required this.displayIcon,
     required this.splash,
-    required this.thumbnail,
+    this.coordinates, // Jadikan nullable
+    required this.displayIcon, // Tambahkan inisialisasi wajib
   });
 
-  factory GameMap.fromJson(Map<String, dynamic> json) {
-    return GameMap(
-      uuid: json['uuid'],
-      displayName: json['displayName'],
-      coordinates: json['coordinates'],
-      displayIcon: json['displayIcon'],
-      splash: json['splash'],
-      thumbnail: json['thumbnail'],
-    );
-  }
-}
-
-class MapInfo {
-  final String uuid;
-  final String displayName;
-  final String location;
-  final String thumbnail;
-
-  MapInfo({
-    required this.uuid,
-    required this.displayName,
-    required this.location,
-    required this.thumbnail,
-  });
-
-  factory MapInfo.fromJson(Map<String, dynamic> json) {
-    return MapInfo(
-      uuid: json['uuid'],
-      displayName: json['displayName'],
-      location: json['location'],
-      thumbnail: json['thumbnail'],
+  factory ValorantMap.fromJson(Map<String, dynamic> json) {
+    return ValorantMap(
+      displayName: json['displayName'] ?? '', // Penanganan untuk nilai null
+      splash: json['splash'] ?? '', // Penanganan untuk nilai null
+      coordinates: json['coordinates'], // Tetap menggunakan nilai dari respons API
+      displayIcon: json['displayIcon'] ?? '', // Penanganan untuk nilai null
     );
   }
 }
